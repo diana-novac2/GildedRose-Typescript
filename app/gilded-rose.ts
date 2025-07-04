@@ -18,6 +18,11 @@ export class GildedRose {
     }
 
     decreaseQuality(item: Item) {
+        if (item.name === "Conjured Mana Cake") {
+            this.updateConjured(item);
+            return;
+        }
+
         if (item.quality > 0) {
             item.quality -= 1;
         }
@@ -61,18 +66,31 @@ export class GildedRose {
         }
     }
 
+    updateConjured(item: Item) {
+        if (item.quality > 1) {
+            item.quality -= 2;
+        }
+
+        item.sellIn -= 1;
+
+        if (item.sellIn < 0 && item.quality > 1) {
+            item.quality -= 2;
+        }
+    }
+
     updateQuality() {
         for (let i = 0; i < this.items.length; i++) {
-            if (this.items[i].name === "Sulfuras, Hand of Ragnaros") {
+            let currentItem = this.items[i];
+            if (currentItem.name === "Sulfuras, Hand of Ragnaros") {
                 continue;
             }
 
-            if (this.items[i].name != "Aged Brie" && this.items[i].name != "Backstage passes to a TAFKAL80ETC concert") {
-                this.decreaseQuality(this.items[i]);
-            } else if (this.items[i].name === "Aged Brie") {
-                this.updateBrie(this.items[i]);
-            } else {
-                this.updateBackstagePasses(this.items[i]);
+            if (currentItem.name != "Aged Brie" && currentItem.name != "Backstage passes to a TAFKAL80ETC concert") {
+                this.decreaseQuality(currentItem);
+            } else if (currentItem.name === "Aged Brie") {
+                this.updateBrie(currentItem);
+            } else if (currentItem.name === "Backstage passes to a TAFKAL80ETC concert") {
+                this.updateBackstagePasses(currentItem);
             }
         }
 
