@@ -34,7 +34,7 @@ describe('Sulfuras requirements', function () {
         expect(items[3].sellIn).to.equal(10);
     });
 
-    it("Sulfura's quality never decreases - check after 10 days", function () {
+    it("Sulfuras' quality never decreases - check after 10 days", function () {
         expect(items[0].quality).to.equal(10);
         expect(items[1].quality).to.equal(5);
         expect(items[2].quality).to.equal(15);
