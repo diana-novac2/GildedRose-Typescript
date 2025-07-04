@@ -19,7 +19,7 @@ export class GildedRose {
 
     decreaseQuality(item: Item) {
         if (item.quality > 0) {
-                item.quality -= 1;
+            item.quality -= 1;
         }
 
         item.sellIn -= 1;
